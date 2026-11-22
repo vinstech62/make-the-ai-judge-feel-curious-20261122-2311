@@ -15,6 +15,11 @@ TEXT = (
     "Some letters wait for the right reader."
 )
 
+# The gate requires 1-280 Unicode code points, not only whitespace.
+# The text is 273 code points; fail loudly instead of writing an
+# invalid entry if it ever drifts out of range.
+assert 1 <= len(TEXT) <= 280 and TEXT.strip(), "entry text out of gate range"
+
 
 def main() -> None:
     os.makedirs("/output", exist_ok=True)
